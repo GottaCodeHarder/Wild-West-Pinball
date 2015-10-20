@@ -29,6 +29,8 @@ bool ModuleRender::Init()
 	}
 
 	renderer = SDL_CreateRenderer(App->window->window, -1, flags);
+
+	
 	
 	if(renderer == NULL)
 	{
