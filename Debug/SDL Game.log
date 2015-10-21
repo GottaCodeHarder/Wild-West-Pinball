@@ -1,24 +1,25 @@
-﻿Compilación iniciada a las 21/10/2015 11:16:40.
-     1>Proyecto "F:\2º\FISICA\PINBALL-WILD-WEST\SDL Game.vcxproj" en el nodo 2 (Build destinos).
+﻿Compilación iniciada a las 21/10/2015 12:49:52.
+     1>Proyecto "D:\Users\miquelms4\Desktop\Wild-West-Pinball\SDL Game.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\soft\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ModuleSceneIntro.cpp
-         ModuleSceneIntro.cpp
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(452): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(453): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(454): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(455): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(456): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(457): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(458): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(459): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(460): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(463): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(555): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(557): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(559): warning C4244: 'argumento' : conversión de 'float' a 'int'; posible pérdida de datos
-     1>f:\2º\fisica\pinball-wild-west\modulesceneintro.cpp(562): warning C4244: 'argumento' : conversión de 'float' a 'int'; posible pérdida de datos
+         C:\soft\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ModulePhysics.cpp
+         ModulePhysics.cpp
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(467): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(468): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(469): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(470): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(471): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(472): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(473): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(474): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(475): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(476): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(477): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(478): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(579): warning C4244: '=' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(580): warning C4244: '=' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>d:\users\miquelms4\desktop\wild-west-pinball\modulephysics.cpp(596): warning C4018: '<' : no coinciden signed/unsigned
        Link:
-         C:\soft\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\2º\FISICA\PINBALL-WILD-WEST\Debug\2D Physics - class 3.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\2º\FISICA\PINBALL-WILD-WEST\Debug\2D Physics - class 3.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\2º\FISICA\PINBALL-WILD-WEST\Debug\2D Physics - class 3.lib" /MACHINE:X86 Debug\Application.obj
+         C:\soft\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\miquelms4\Desktop\Wild-West-Pinball\Debug\2D Physics - class 3.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\miquelms4\Desktop\Wild-West-Pinball\Debug\2D Physics - class 3.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\miquelms4\Desktop\Wild-West-Pinball\Debug\2D Physics - class 3.lib" /MACHINE:X86 Debug\Application.obj
          Debug\log.obj
          Debug\Main.obj
          Debug\ModuleAudio.obj
@@ -29,9 +30,9 @@
          Debug\ModuleSceneIntro.obj
          Debug\ModuleTextures.obj
          Debug\ModuleWindow.obj
-         SDL Game.vcxproj -> F:\2º\FISICA\PINBALL-WILD-WEST\Debug\2D Physics - class 3.exe
-     1>Compilación del proyecto terminada "F:\2º\FISICA\PINBALL-WILD-WEST\SDL Game.vcxproj" (Build destinos).
+         SDL Game.vcxproj -> D:\Users\miquelms4\Desktop\Wild-West-Pinball\Debug\2D Physics - class 3.exe
+     1>Compilación del proyecto terminada "D:\Users\miquelms4\Desktop\Wild-West-Pinball\SDL Game.vcxproj" (Build destinos).
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:14.17
+Tiempo transcurrido 00:00:01.13
