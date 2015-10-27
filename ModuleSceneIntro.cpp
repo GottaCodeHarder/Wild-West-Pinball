@@ -29,7 +29,7 @@ bool ModuleSceneIntro::Start()
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
-	background = App->textures->Load("pinball/PinballBackGround.png");
+	background = App->textures->Load("pinball/PinballBackGround2.png");
 
 	
 

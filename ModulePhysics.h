@@ -46,12 +46,15 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircleFix(int x, int y, int diam, float rest);
+	PhysBody* CreateFlipper(int x, int y, int angle);
 	PhysBody* CreateCircle(int x, int y, int radius);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, float rest);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size, float rest);
 
-	
+	PhysBody* flipper_izq;
+	PhysBody* flipper_der;
+
 
 
 private:
