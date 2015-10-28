@@ -55,11 +55,11 @@ bool ModulePhysics::Start()
 		267, 77,
 		237, 87,
 		221, 65,
-		205, 55,
-		180, 53,
-		156, 61,
-		136, 80,
-		134, 105,
+		203, 51,
+		175, 43,
+		149, 52,
+		128, 72,
+		128, 100,
 		140, 123,
 		158, 143,
 		138, 170,
@@ -112,7 +112,6 @@ bool ModulePhysics::Start()
 		635, 758,
 		672, 758
 	};
-
 
 	int barras_cash[16] = {
 		226, 218,
@@ -511,18 +510,18 @@ bool ModulePhysics::Start()
 	App->physics->CreateChain(0, 0, reb_der, 6, 10);
 	App->physics->CreateChain(0, 0, reb_izq, 6, 10);
 
-	App->physics->CreateCircleFix(149, 96, 61, 2.0f);
-	App->physics->CreateCircleFix(197, 300, 39, 1.5f);
-	App->physics->CreateCircleFix(285, 304, 39, 1.5f);
-	App->physics->CreateCircleFix(242, 347, 39, 1.5f);
-	App->physics->CreateCircleFix(365, 242, 45, 1.5f);
-	App->physics->CreateCircleFix(433, 296, 45, 1.5f);
-	App->physics->CreateCircleFix(484, 236, 45, 1.5f);
+	App->physics->CreateCircleFix(183, 98, 55, 2.0f);
+	App->physics->CreateCircleFix(215, 272, 35, 1.5f);
+	App->physics->CreateCircleFix(290, 273, 35, 1.5f);
+	App->physics->CreateCircleFix(255, 319, 35, 1.5f);
+	App->physics->CreateCircleFix(364, 218, 35, 1.5f);
+	App->physics->CreateCircleFix(425, 266, 35, 1.5f);
+	App->physics->CreateCircleFix(470, 208, 35, 1.5f);
 
 	App->physics->CreateRectangle(670, 825, 40, 80, 10.0f);
 
-	flipper_izq = CreateFlipper(255, 916, 1);
-	flipper_der = CreateFlipper(475, 916, -1);
+	flipper_izq = CreateFlipper(257, 905, 1);
+	flipper_der = CreateFlipper(475, 905, -1);
 
 	return true;
 }
