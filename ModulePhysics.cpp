@@ -33,6 +33,8 @@ bool ModulePhysics::Start()
 	// TODO 3: You need to make ModulePhysics class a contact listener
 
 
+
+
 	int	map[154] = {
 		671, 749,
 		684, 749,
@@ -529,6 +531,11 @@ bool ModulePhysics::Start()
 	flipper_der_wheel = App->physics->CreateCircleFix(472, 905, 20, 0);
 
 	App->physics->CreateRevoluteJoint(flipper_der, flipper_der_wheel, 42, 0, 0, 0, 20, -30);
+
+	lanzadera = App->physics->CreateRectangle(663, 820, 41, 50, 0.0f, b_dynamic);
+	eje_lanz = App->physics->CreateCircleFix(640, 765, 10, 0);
+	App->physics->CreateLineJoint(lanzadera, eje_lanz, 20.0f, 1.0f);
+
 	return true;
 }
 
@@ -590,6 +597,20 @@ PhysBody* ModulePhysics::CreateCircleFix(int x, int y, int diam, float rest)
 
 	return pbody;
 }
+
+void ModulePhysics::CreateLineJoint(PhysBody* body_1, PhysBody* body_2, float freq, float damp)
+{
+	b2DistanceJointDef def;
+
+	def.bodyA = body_1->body;
+	def.bodyB = body_2->body;
+
+	def.dampingRatio = damp;
+	def.frequencyHz = freq;
+
+	world->CreateJoint(&def);
+}
+
 void ModulePhysics::CreateRevoluteJoint(PhysBody* body_1, PhysBody* body_2, int x_pivot_1, int y_pivot_1, int x_pivot_2, int y_pivot_2, int max_angle, int min_angle)
 {
 	b2RevoluteJointDef def;

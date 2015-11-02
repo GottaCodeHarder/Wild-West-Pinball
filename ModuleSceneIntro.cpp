@@ -29,6 +29,7 @@ bool ModuleSceneIntro::Start()
 	box = App->textures->Load("pinball/crate.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	background = App->textures->Load("pinball/PinballBackGround2.png");
+	foreground = App->textures->Load("pinball/PinballForeground.png");
 	flipper_d = App->textures->Load("pinball/Flipper Derecho.png");
 	flipper_i = App->textures->Load("pinball/Flipper Izquierdo.png");
 
@@ -56,7 +57,16 @@ update_status ModuleSceneIntro::Update()
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 10));
 	}
 	
-	
+	static float pot = 0.0f;
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && pot < 40000)
+	{
+		pot += 500.0f;
+		App->physics->lanzadera->Push(0, pot);
+	}
+
+	else
+		pot = 0;
 
 	// Prepare for raycast ------------------------------------------------------
 	
@@ -116,6 +126,7 @@ update_status ModuleSceneIntro::Update()
 		if(normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
+	App->renderer->Blit(foreground, 0, 0, NULL);
 
 	return UPDATE_CONTINUE;
 }
