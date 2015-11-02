@@ -31,6 +31,8 @@ public:
 	SDL_Texture* rick;
 	SDL_Texture* background;
 	SDL_Texture* foreground;
+	SDL_Texture* flipper_d;
+	SDL_Texture* flipper_i;
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;

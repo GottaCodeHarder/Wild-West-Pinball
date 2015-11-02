@@ -814,11 +814,6 @@ inline void b2Body::ApplyLinearImpulse(const b2Vec2& impulse, const b2Vec2& poin
 
 inline void b2Body::ApplyAngularImpulse(float32 impulse, bool wake)
 {
-	if (m_type != b2_dynamicBody)
-	{
-		return;
-	}
-
 	if (wake && (m_flags & e_awakeFlag) == 0)
 	{
 		SetAwake(true);

@@ -507,22 +507,28 @@ bool ModulePhysics::Start()
 	//if (activation){
 	App->physics->CreateChain(0, 0, via_central, 76, 0.2);
 
-	App->physics->CreateChain(0, 0, reb_der, 6, 10);
-	App->physics->CreateChain(0, 0, reb_izq, 6, 10);
+	App->physics->CreateChain(0, 0, reb_der, 6, 4.0f);
+	App->physics->CreateChain(0, 0, reb_izq, 6, 4.0f);
 
 	App->physics->CreateCircleFix(183, 98, 55, 2.0f);
-	App->physics->CreateCircleFix(215, 272, 35, 1.5f);
-	App->physics->CreateCircleFix(290, 273, 35, 1.5f);
-	App->physics->CreateCircleFix(255, 319, 35, 1.5f);
-	App->physics->CreateCircleFix(364, 218, 35, 1.5f);
-	App->physics->CreateCircleFix(425, 266, 35, 1.5f);
-	App->physics->CreateCircleFix(470, 208, 35, 1.5f);
+	App->physics->CreateCircleFix(215, 272, 35, 2.0f);
+	App->physics->CreateCircleFix(290, 273, 35, 1.2f);
+	App->physics->CreateCircleFix(255, 310, 30, 1.0f);
+	App->physics->CreateCircleFix(364, 218, 35, 1.2f);
+	App->physics->CreateCircleFix(425, 266, 35, 1.2f);
+	App->physics->CreateCircleFix(470, 208, 35, 1.2f);
 
-	App->physics->CreateRectangle(670, 825, 40, 80, 10.0f);
+	App->physics->CreateRectangle(670, 825, 40, 80, 10.0f, b_dynamic);
 
-	flipper_izq = CreateFlipper(257, 905, 1);
-	flipper_der = CreateFlipper(475, 905, -1);
+	flipper_izq = App->physics->CreateRectangle(300, 905, 100, 25, 0, b_dynamic);
+	flipper_izq_wheel = App->physics->CreateCircleFix(255, 905, 20, 0);
+	
+	App->physics->CreateRevoluteJoint(flipper_izq, flipper_izq_wheel, -42, 0, 0, 0, 30, -20);
 
+	flipper_der = App->physics->CreateRectangle(420, 905, 100, 25, 0, b_dynamic);
+	flipper_der_wheel = App->physics->CreateCircleFix(472, 905, 20, 0);
+
+	App->physics->CreateRevoluteJoint(flipper_der, flipper_der_wheel, 42, 0, 0, 0, 20, -30);
 	return true;
 }
 
@@ -530,6 +536,27 @@ bool ModulePhysics::Start()
 update_status ModulePhysics::PreUpdate()
 {
 	world->Step(1.0f / 60.0f, 6, 2);
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	{
+		flipper_izq->Turn(-360);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	{
+		flipper_der->Turn(360);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+	{
+		flipper_izq->Turn(720);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+	{
+		flipper_der->Turn(-720);
+	}
+
 
 	// TODO: HomeWork
 	/*
@@ -563,73 +590,24 @@ PhysBody* ModulePhysics::CreateCircleFix(int x, int y, int diam, float rest)
 
 	return pbody;
 }
-
-PhysBody* ModulePhysics::CreateFlipper(int x, int y, int angle)
+void ModulePhysics::CreateRevoluteJoint(PhysBody* body_1, PhysBody* body_2, int x_pivot_1, int y_pivot_1, int x_pivot_2, int y_pivot_2, int max_angle, int min_angle)
 {
-	//body and fixture defs - the common parts
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-	b2FixtureDef fixtureDef;
-	fixtureDef.density = 10;
+	b2RevoluteJointDef def;
 
-	b2BodyDef bodyDef2;
-	bodyDef2.type = b2_staticBody;
+	def.bodyA = body_1->body;
+	def.bodyB = body_2->body;
 
+	def.localAnchorA.Set(PIXEL_TO_METERS(x_pivot_1), PIXEL_TO_METERS(y_pivot_1));
+	def.localAnchorB.Set(PIXEL_TO_METERS(x_pivot_2), PIXEL_TO_METERS(y_pivot_2));
 
-	//two shapes
-	b2PolygonShape boxShape;
-	boxShape.SetAsBox(PIXEL_TO_METERS(50), PIXEL_TO_METERS(5));
-	b2CircleShape circleShape;
-	circleShape.m_radius = PIXEL_TO_METERS(15);
-
-	//make box a little to the left
-	bodyDef.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-	fixtureDef.shape = &boxShape;
-	b2Body* m_bodyA = world->CreateBody(&bodyDef);
-	m_bodyA->CreateFixture(&fixtureDef);
-
-	//and circle a little to the right
-	bodyDef2.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-	fixtureDef.shape = &circleShape;
-	b2Body* m_bodyB = world->CreateBody(&bodyDef2);
-	m_bodyB->CreateFixture(&fixtureDef);
-
-	b2RevoluteJointDef revoluteJointDef;
-	revoluteJointDef.referenceAngle = -angle * 18 * DEGTORAD;
-
-	revoluteJointDef.enableLimit = true;
-
-	if (angle == 1)
+	if (max_angle != INT_MAX && min_angle != INT_MIN)
 	{
-		revoluteJointDef.lowerAngle = 0 * DEGTORAD;
-		revoluteJointDef.upperAngle = 45 * DEGTORAD;
+		def.enableLimit = true;
+		def.upperAngle = DEGTORAD * max_angle;
+		def.lowerAngle = DEGTORAD * min_angle;
 	}
 
-	if (angle == -1)
-	{
-	}
-
-	revoluteJointDef.enableMotor = true;
-	revoluteJointDef.motorSpeed = 50;
-	revoluteJointDef.maxMotorTorque = 100;
-
-	revoluteJointDef.bodyA = m_bodyA;
-	revoluteJointDef.bodyB = m_bodyB;
-	revoluteJointDef.localAnchorA.Set(-0.9*angle, 0.2);//the top right corner of the box
-	revoluteJointDef.localAnchorB.Set(0, 0);//center of the circle
-	b2Joint* m_joint = world->CreateJoint(&revoluteJointDef);
-
-	PhysBody* pbodyB = new PhysBody();
-	pbodyB->body = m_bodyB;
-	pbodyB->width = 50;
-	pbodyB->height = 5;
-
-	PhysBody* pbodyA = new PhysBody();
-	pbodyA->body = m_bodyA;
-	pbodyA->width = pbodyA->height = 15;
-
-	return pbodyA, pbodyB;
-
+	world->CreateJoint(&def);
 }
 
 PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
@@ -657,10 +635,25 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, float rest)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, float rest, body_type type)
 {
 	b2BodyDef body;
-	body.type = b2_staticBody;
+
+	switch (type)
+	{
+	case b_static:
+		body.type = b2_staticBody;
+		break;
+
+	case b_kinematic:
+		body.type = b2_kinematicBody;
+		break;
+
+	default:
+		body.type = b2_dynamicBody;
+		break;
+	}
+
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -839,7 +832,48 @@ int PhysBody::RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& no
 	return ret;
 }
 
-
 // TODO 3
 
 // TODO 7: Call the listeners that are not NULL
+
+PhysBody::PhysBody(b2Body* body, const SDL_Rect& rect, body_type type) : body(body), rect(rect), type(type), listener(NULL)
+{}
+
+PhysBody::PhysBody(){};
+
+PhysBody::~PhysBody()
+{
+	body->GetWorld()->DestroyBody(body);
+	body = NULL;
+	listener = NULL;
+}
+
+double PhysBody::GetAngle() const
+{
+	return RADTODEG * body->GetAngle();
+}
+
+void PhysBody::SetLinearSpeed(int x, int y)
+{
+	body->SetLinearVelocity(b2Vec2(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y)));
+}
+
+void PhysBody::SetAngularSpeed(float speed)
+{
+	body->SetAngularVelocity(speed * DEGTORAD);
+}
+
+void PhysBody::Push(float x, float y)
+{
+	body->ApplyForceToCenter(b2Vec2(x, y), true);
+}
+
+void PhysBody::Turn(int degrees)
+{
+	body->ApplyAngularImpulse(DEGTORAD * degrees, true);
+}
+
+void PhysBody::SetPosition(int x, int y)
+{
+	body->SetTransform(b2Vec2(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y)), 0.0f);
+}

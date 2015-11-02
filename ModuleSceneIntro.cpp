@@ -27,13 +27,10 @@ bool ModuleSceneIntro::Start()
 
 	circle = App->textures->Load("pinball/ball.png"); 
 	box = App->textures->Load("pinball/crate.png");
-	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	background = App->textures->Load("pinball/PinballBackGround2.png");
-
-	
-
-	
+	flipper_d = App->textures->Load("pinball/Flipper Derecho.png");
+	flipper_i = App->textures->Load("pinball/Flipper Izquierdo.png");
 
 	// TODO: Homework - create a sensor
 
