@@ -25,6 +25,14 @@ public:
 
 	PhysBody* sensor;
 	bool sensed;
+	bool activation;
+
+	PhysBody* flipper_izq;
+	PhysBody* flipper_der;
+	PhysBody* flipper_izq_wheel;
+	PhysBody* flipper_der_wheel;
+	PhysBody* lanzadera;
+	PhysBody* eje_lanz;
 
 	SDL_Texture* circle;
 	SDL_Texture* background;
@@ -42,6 +50,8 @@ public:
 	uint sfx_bonus;
 	uint sfx_rebotadores;
 	uint sfx_launcher;
+	uint sfx_flipper;
+
 	p2Point<int> ray;
 	bool ray_on;
 };
