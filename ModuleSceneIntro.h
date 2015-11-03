@@ -27,14 +27,8 @@ public:
 	bool sensed;
 	bool activation;
 
-	PhysBody* flipper_izq;
-	PhysBody* flipper_der;
-	PhysBody* flipper_izq_wheel;
-	PhysBody* flipper_der_wheel;
-	PhysBody* lanzadera;
-	PhysBody* eje_lanz;
-
-	bool ball;
+	
+	PhysBody* morir;
 
 	SDL_Texture* circle;
 	SDL_Texture* background;

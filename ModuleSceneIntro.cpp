@@ -31,10 +31,9 @@ bool ModuleSceneIntro::Start()
 	background = App->textures->Load("pinball/PinballBackGround2.png");
 	foreground = App->textures->Load("pinball/PinballForeground.png");
 
-	flipper_d = App->textures->Load("pinball/Flipper Derecho.png");
-	flipper_i = App->textures->Load("pinball/Flipper Izquierdo.png");
 
-	//App->audio->PlayMusic("pinball/Soundtrack.mp3", 0.0f);
+
+	App->audio->PlayMusic("pinball/Soundtrack.mp3", 0.0f);
 	
 	// SENSOR
 	green = App->textures->Load("pinball/verde.png");
@@ -45,7 +44,6 @@ bool ModuleSceneIntro::Start()
 	sfx_bonus = App->audio->LoadFx("pinball/ding.wav");
 	sfx_rebotadores = App->audio->LoadFx("pinball/rebotadores.wav");
 	sfx_launcher = App->audio->LoadFx("pinball/launcher.wav");
-	sfx_flipper = App->audio->LoadFx("pinball/flipper.wav"); // Provisional
 
 
 	// MAPA
@@ -507,9 +505,22 @@ bool ModuleSceneIntro::Start()
 		524, 531
 	};
 
-	int muerte[4] = {
+	int muerte[6] = {
 		303, 1000,
-		463, 1000
+		463, 1000,
+		463, 1001
+	};
+
+	int reb_bajo_izq[6] = {
+		85, 1000,
+		130, 1000,
+		130, 1001
+	};
+
+	int reb_bajo_der[6] = {
+		595, 1000,
+		640, 1000,
+		640, 1001
 	};
 
 
@@ -524,11 +535,13 @@ bool ModuleSceneIntro::Start()
 	App->physics->CreateObj(0, 0, curva_der_arriba, 52, 0, 0, 0, 0.2f, false, b_static);
 	App->physics->CreateObj(0, 0, tri_der, 30, 0, 0, 0, 0.2f, false, b_static);
 	App->physics->CreateObj(0, 0, tri_izq, 30, 0, 0, 0, 0.2f, false, b_static);
-	App->physics->CreateObj(0, 0, reb_der, 6, 0, 0, 0, 0.2f, false, b_static);
-	App->physics->CreateObj(0, 0, reb_izq, 6, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, reb_der, 6, 0, 0, 0, 2.0f, false, b_static);
+	App->physics->CreateObj(0, 0, reb_izq, 6, 0, 0, 0, 2.0f, false, b_static);
+	App->physics->CreateObj(0, 0, reb_bajo_der, 6, 0, 0, 0, 5.0f, false, b_static);
+	App->physics->CreateObj(0, 0, reb_bajo_izq, 6, 0, 0, 0, 5.0f, false, b_static);
 
 	//SENSOR MUERTE ABAJO
-	//App->physics->CreateObj(0, 0, muerte, 4, 0, 0, 0, 0, true, b_static);
+	morir = App->physics->CreateObj(0, 0, muerte, 6, 0, 0, 0, 0, true, b_static);
 
 
 
@@ -551,23 +564,11 @@ bool ModuleSceneIntro::Start()
 	App->physics->CreateObj(425, 266, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
 	App->physics->CreateObj(470, 208, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
 
-	flipper_izq = App->physics->CreateObj(300, 905, NULL, 0, 0, 100, 25, 0, false, b_dynamic);
-	flipper_izq_wheel = App->physics->CreateObj(255, 905, NULL, 0, 20, 0, 0, 0, true, b_static);
+	
 	
 
-	App->physics->CreateRevoluteJoint(flipper_izq, flipper_izq_wheel, -42, 0, 0, 0, 30, -20);
-
-	flipper_der = App->physics->CreateObj(420, 905, NULL, 0, 0, 100, 25, 0, false, b_dynamic);
-		
-	flipper_der_wheel = App->physics->CreateObj(472, 905, NULL, 0, 20, 0, 0, 0, false, b_static);
 	
-
-	App->physics->CreateRevoluteJoint(flipper_der, flipper_der_wheel, 42, 0, 0, 0, 20, -30);
-
-	lanzadera = App->physics->CreateObj(647, 810, NULL, 0, 0, 48, 25, 0, false, b_dynamic);
-	eje_lanz = App->physics->CreateObj(630, 722, NULL, 0, 1, 0, 0, 0, false, b_static);
-	App->physics->CreateLineJoint(lanzadera, eje_lanz, 20.0f, 1.0f);
-	ball = false;
+	
 	return ret;
 }
 
@@ -589,39 +590,12 @@ update_status ModuleSceneIntro::Update()
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		circles.add(App->physics->CreateObj(App->input->GetMouseX(), App->input->GetMouseY(), NULL, 0, 20, 0, 0, 0, false, b_dynamic));
 
-	if (!ball)
-	{
-		circles.add(App->physics->CreateObj(670, 730, NULL, 0, 20, 0, 0, 0, false, b_dynamic));
-		ball = true;
-	}
-		
-
-	if ((App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
-		App->audio->PlayFx(sfx_flipper);
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
-		flipper_izq->Turn(-360);
 	
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
-		flipper_der->Turn(360);
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
-		flipper_izq->Turn(1000);
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
-		flipper_der->Turn(-1000);
-	
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
-		App->audio->PlayFx(sfx_launcher);
-
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && pot < 20000)
+	/*if (OnCollision(morir, ball))
 	{
-		pot += 100.0f;
-	    lanzadera->Push(0, pot);
-	}
-	else
-		pot = 0;
 
+	}*/
 	// Prepare for raycast ------------------------------------------------------
 	
 	iPoint mouse;
@@ -632,15 +606,6 @@ update_status ModuleSceneIntro::Update()
 	fVector normal(0.0f, 0.0f);
 
 	// All draw functions ------------------------------------------------------
-	p2List_item<PhysBody*>* c = circles.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(circle, x, y, NULL, 1.0f, 0);
-		c = c->next;
-	}
 
 	// ray -----------------
 	if(ray_on == true)
