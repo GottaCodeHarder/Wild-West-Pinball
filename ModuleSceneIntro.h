@@ -1,10 +1,35 @@
 #pragma once
 #include "Module.h"
-#include "p2List.h"
+#include "p2DynArray.h"
 #include "p2Point.h"
 #include "Globals.h"
 
 class PhysBody;
+
+enum lightTypes
+{
+	green = 1,
+	purple,
+	blue,
+	arrow_pink
+};
+
+class ModuleSceneIntro;
+
+struct Sign
+{
+	Sign() : body(NULL), texture(NULL), on(false), fx(0)
+	{}
+
+	Sign(ModuleSceneIntro* physics, int x, int y, lightTypes type);
+
+	lightTypes type;
+	PhysBody* body;
+	SDL_Texture* texture;
+	bool on;
+	uint fx;
+	int x, y;
+};
 
 class ModuleSceneIntro : public Module
 {
@@ -42,6 +67,8 @@ public:
 	SDL_Texture* blue;
 	SDL_Texture* arrow_pink;
 	SDL_Texture* launcher; // lanzadora
+
+	p2DynArray<Sign> signs;
 
 	uint sfx_bonus;
 	uint sfx_rebotadores;

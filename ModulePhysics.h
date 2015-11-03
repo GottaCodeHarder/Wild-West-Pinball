@@ -19,7 +19,6 @@ enum body_type
 	b_kinematic
 };
 
-// Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
 {
 public:
@@ -34,7 +33,6 @@ public:
 
 	double GetAngle() const;
 	void SetLinearSpeed(int x, int y);
-	void SetAngularSpeed(float speed);
 	void Push(float x, float y);
 	void Turn(int degrees);
 	void SetPosition(int x, int y);
@@ -43,6 +41,7 @@ public:
 	int width, height;
 	b2Body* body;
 	Module* listener;
+
 	SDL_Texture* graphic;
 	uint music;
 

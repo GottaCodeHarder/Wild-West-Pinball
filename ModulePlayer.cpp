@@ -93,6 +93,9 @@ update_status ModulePlayer::Update()
 	App->renderer->Blit(flipper_der.graphic, der_x - 8, der_y - 26, NULL, 1.0f, flipper_der.body->GetRotation() + 21, -10);
 	App->renderer->Blit(flipper_izq.graphic, izq_x - 8, izq_y - 26, NULL, 1.0f, flipper_izq.body->GetRotation() - 21, +10);
 
+	if (App->scene_intro->activation == false)
+		App->renderer->Blit(App->scene_intro->foreground, 0, 0, NULL);
+
 	return UPDATE_CONTINUE;
 }
 

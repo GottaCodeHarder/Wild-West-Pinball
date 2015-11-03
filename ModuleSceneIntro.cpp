@@ -17,6 +17,37 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 ModuleSceneIntro::~ModuleSceneIntro()
 {}
 
+Sign::Sign(ModuleSceneIntro* scene, int x, int y, lightTypes type)
+{
+	this->type = type;
+	this->x = x;
+	this->y = y;
+
+	switch (type)
+	{
+	case green:
+		texture = scene->green;
+		fx = scene->sfx_bonus;
+		break;
+	case purple:
+		texture = scene->purple;
+		fx = scene->sfx_bonus;
+		break;
+	case blue:
+		texture = scene->blue;
+		fx = scene->sfx_bonus;
+		break;
+	case arrow_pink:
+		texture = scene->arrow_pink;
+		fx = scene->sfx_bonus;
+		break;
+	}
+
+	body = scene->App->physics->CreateObj(x, y, NULL, NULL, 10, NULL, NULL, 0.0f, true, b_static);
+	body->listener = scene;
+	on = false;
+}
+
 // Load assets
 bool ModuleSceneIntro::Start()
 {
@@ -30,8 +61,6 @@ bool ModuleSceneIntro::Start()
 
 	background = App->textures->Load("pinball/PinballBackGround2.png");
 	foreground = App->textures->Load("pinball/PinballForeground.png");
-
-
 
 	App->audio->PlayMusic("pinball/Soundtrack.mp3", 0.0f);
 	
@@ -542,8 +571,8 @@ bool ModuleSceneIntro::Start()
 
 	//SENSOR MUERTE ABAJO
 	morir = App->physics->CreateObj(0, 0, muerte, 6, 0, 0, 0, 0, true, b_static);
-
-
+	
+	signs.PushBack(Sign(this, 454, 112, lightTypes::green));
 
 	// PUENTE
 	if (!activation)
@@ -560,9 +589,9 @@ bool ModuleSceneIntro::Start()
 	App->physics->CreateObj(215, 272, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
 	App->physics->CreateObj(290, 273, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
 	App->physics->CreateObj(255, 310, NULL, 0, 30, 0, 0, 1.0f, false, b_static);
-	App->physics->CreateObj(364, 218, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
-	App->physics->CreateObj(425, 266, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
-	App->physics->CreateObj(470, 208, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
+	App->physics->CreateObj(364, 218, NULL, 0, 35, 0, 0, 1.5f, false, b_static);
+	App->physics->CreateObj(425, 266, NULL, 0, 35, 0, 0, 1.5f, false, b_static);
+	App->physics->CreateObj(470, 208, NULL, 0, 35, 0, 0, 1.5f, false, b_static);
 
 	
 	
@@ -607,6 +636,14 @@ update_status ModuleSceneIntro::Update()
 
 	// All draw functions ------------------------------------------------------
 
+	for (uint i = 0; i < signs.Count(); ++i)
+	{
+		if (signs[i].on == true)
+		{
+			App->renderer->Blit(signs[i].texture, signs[i].x, signs[i].y, NULL);
+		}
+	}
+
 	// ray -----------------
 	if(ray_on == true)
 	{
@@ -620,10 +657,12 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
-	if (!activation)
-		App->renderer->Blit(foreground, 0, 0, NULL);
+	char title[100];
+	sprintf_s(title, "%s Balls: %d Score: %06d Last Score: %06d", TITLE, 0, 0, 0);
+	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
 }
 
 // TODO 8: Now just define collision callback for the circle and play bonus_fx audio
+

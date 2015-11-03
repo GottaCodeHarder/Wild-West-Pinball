@@ -325,11 +325,6 @@ void PhysBody::SetLinearSpeed(int x, int y)
 	body->SetLinearVelocity(b2Vec2(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y)));
 }
 
-void PhysBody::SetAngularSpeed(float speed)
-{
-	body->SetAngularVelocity(speed * DEGTORAD);
-}
-
 void PhysBody::Push(float x, float y)
 {
 	body->ApplyForceToCenter(b2Vec2(x, y), true);
