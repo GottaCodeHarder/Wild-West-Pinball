@@ -1,31 +1,25 @@
-﻿Compilación iniciada a las 02/11/2015 23:25:02.
+﻿Compilación iniciada a las 03/11/2015 3:02:44.
      1>Proyecto "C:\Users\Master\Documents\UPC - UNIVERSITAT POLITECNICA\VideoJuegos CITM\3r - Fisica II\Wild West Pinball\Wild-West-Pinball\SDL Game.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ModulePhysics.cpp ModuleSceneIntro.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Application.cpp Main.cpp ModuleAudio.cpp ModuleInput.cpp ModulePhysics.cpp ModulePlayer.cpp ModuleRender.cpp ModuleSceneIntro.cpp ModuleTextures.cpp ModuleWindow.cpp
          ModuleSceneIntro.cpp
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(120): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(122): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(124): warning C4244: 'argumento' : conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(127): warning C4244: 'argumento' : conversión de 'float' a 'int'; posible pérdida de datos
-         ModulePhysics.cpp
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(495): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(496): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(497): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(498): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(499): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(500): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(501): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(502): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(503): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(504): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(505): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(507): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(508): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(510): warning C4305: 'argumento' : truncamiento de 'double' a 'float'
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(692): warning C4244: '=' : conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(693): warning C4244: '=' : conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(709): warning C4018: '<' : no coinciden signed/unsigned
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(104): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(106): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(108): warning C4244: 'argumento' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(111): warning C4244: 'argumento' : conversión de 'float' a 'int'; posible pérdida de datos
          Generando código...
+         Compilando...
+         Application.cpp
+         Generando código...
+         Omitiendo... (no se detectaron cambios relevantes)
+         ModuleWindow.cpp
+         ModuleTextures.cpp
+         ModuleRender.cpp
+         ModulePlayer.cpp
+         ModulePhysics.cpp
+         ModuleInput.cpp
+         ModuleAudio.cpp
+         Main.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Master\Documents\UPC - UNIVERSITAT POLITECNICA\VideoJuegos CITM\3r - Fisica II\Wild West Pinball\Wild-West-Pinball\Debug\2D Physics - class 3.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Master\Documents\UPC - UNIVERSITAT POLITECNICA\VideoJuegos CITM\3r - Fisica II\Wild West Pinball\Wild-West-Pinball\Debug\2D Physics - class 3.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Master\Documents\UPC - UNIVERSITAT POLITECNICA\VideoJuegos CITM\3r - Fisica II\Wild West Pinball\Wild-West-Pinball\Debug\2D Physics - class 3.lib" /MACHINE:X86 Debug\Application.obj
          Debug\log.obj
@@ -43,4 +37,4 @@
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:01.66
+Tiempo transcurrido 00:00:01.72

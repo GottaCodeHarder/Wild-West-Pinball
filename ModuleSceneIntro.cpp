@@ -9,7 +9,7 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	circle = box = rick = NULL;
+	circle = NULL;
 	ray_on = false;
 	sensed = false;
 }
@@ -26,14 +26,24 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	circle = App->textures->Load("pinball/ball.png"); 
-	box = App->textures->Load("pinball/crate.png");
-	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+
 	background = App->textures->Load("pinball/PinballBackGround2.png");
 	foreground = App->textures->Load("pinball/PinballForeground.png");
+
 	flipper_d = App->textures->Load("pinball/Flipper Derecho.png");
 	flipper_i = App->textures->Load("pinball/Flipper Izquierdo.png");
 
-	// TODO: Homework - create a sensor
+	//App->audio->PlayMusic("pinball/Soundtrack.mp3", 0.0f);
+	
+	// SENSOR
+	green = App->textures->Load("pinball/verde.png");
+	purple = App->textures->Load("pinball/morado.png");
+	blue = App->textures->Load("pinball/azul.png");
+	arrow_pink = App->textures->Load("pinball/rosa.png");
+
+	sfx_bonus = App->audio->LoadFx("pinball/ding.wav");
+	sfx_rebotadores = App->audio->LoadFx("pinball/rebotadores.wav");
+	sfx_launcher = App->audio->LoadFx("pinball/launcher.wav");
 
 	return ret;
 }
@@ -85,32 +95,6 @@ update_status ModuleSceneIntro::Update()
 		int x, y;
 		c->data->GetPosition(x, y);
 		App->renderer->Blit(circle, x, y, NULL, 1.0f, 0);
-		c = c->next;
-	}
-
-	c = boxes.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
-		if(ray_on)
-		{
-			int hit = c->data->RayCast(ray.x, ray.y, mouse.x, mouse.y, normal.x, normal.y);
-			if(hit >= 0)
-				ray_hit = hit;
-		}
-		c = c->next;
-	}
-
-	c = ricks.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
 

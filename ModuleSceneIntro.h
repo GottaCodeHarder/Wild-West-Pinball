@@ -27,13 +27,21 @@ public:
 	bool sensed;
 
 	SDL_Texture* circle;
-	SDL_Texture* box;
-	SDL_Texture* rick;
 	SDL_Texture* background;
 	SDL_Texture* foreground;
+
 	SDL_Texture* flipper_d;
 	SDL_Texture* flipper_i;
-	uint bonus_fx;
+
+	SDL_Texture* green; // sensores
+	SDL_Texture* purple;
+	SDL_Texture* blue;
+	SDL_Texture* arrow_pink;
+	SDL_Texture* launcher; // lanzadora
+
+	uint sfx_bonus;
+	uint sfx_rebotadores;
+	uint sfx_launcher;
 	p2Point<int> ray;
 	bool ray_on;
 };

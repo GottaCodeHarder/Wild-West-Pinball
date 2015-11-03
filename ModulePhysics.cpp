@@ -631,7 +631,7 @@ void ModulePhysics::CreateRevoluteJoint(PhysBody* body_1, PhysBody* body_2, int 
 	world->CreateJoint(&def);
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool isSensor)
 {
 	b2BodyDef body;
 	body.type = b2_dynamicBody;
@@ -646,6 +646,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	fixture.density = 1.0f;
 	fixture.restitution = 0;
 	fixture.friction = 5;
+	fixture.isSensor = isSensor;
 	b->CreateFixture(&fixture);
 
 	// TODO 4: add a pointer to PhysBody as UserData to the body
