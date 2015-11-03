@@ -52,7 +52,6 @@ public:
 	bool sensed;
 	bool activation;
 
-	
 	PhysBody* morir;
 
 	SDL_Texture* circle;
@@ -78,4 +77,8 @@ public:
 	p2Point<int> ray;
 	bool ray_on;
 	float pot = 0.0f;
+
+	uint best_score = 0;
+	uint score = 0;
+	uint life = 3;
 };

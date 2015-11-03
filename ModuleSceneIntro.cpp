@@ -43,7 +43,7 @@ Sign::Sign(ModuleSceneIntro* scene, int x, int y, lightTypes type)
 		break;
 	}
 
-	body = scene->App->physics->CreateObj(x, y, NULL, NULL, 10, NULL, NULL, 0.0f, true, b_static);
+	body = scene->App->physics->CreateObj(x, y, NULL, NULL, 18, NULL, NULL, 0.0f, true, b_static);
 	body->listener = scene;
 	on = false;
 }
@@ -619,12 +619,6 @@ update_status ModuleSceneIntro::Update()
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		circles.add(App->physics->CreateObj(App->input->GetMouseX(), App->input->GetMouseY(), NULL, 0, 20, 0, 0, 0, false, b_dynamic));
 
-	
-
-	/*if (OnCollision(morir, ball))
-	{
-
-	}*/
 	// Prepare for raycast ------------------------------------------------------
 	
 	iPoint mouse;
@@ -658,11 +652,55 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	char title[100];
-	sprintf_s(title, "%s Balls: %d Score: %06d Last Score: %06d", TITLE, 0, 0, 0);
+	sprintf_s(title, "%s Balls: %d Score: %06d Best Score: %06d", TITLE, life, score, best_score);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
 }
 
-// TODO 8: Now just define collision callback for the circle and play bonus_fx audio
+void ModuleSceneIntro::OnCollision(PhysBody* body1, PhysBody* body2)
+{
+	for (uint i = 0; i < signs.Count(); ++i)
+	{
+		if (body1 == signs[i].body)
+		{
+			if (signs[i].on == false)
+			{
+				signs[i].on = true;
+				App->audio->PlayFx(signs[i].fx);
+				switch (signs[i].type)
+				{
+				case 1:
+					score += 100;
+					break;
+				case 2:
+					score += 100;
+					break;
+				case 3:
+					score += 100;
+					break;
+				case 4:
+					score += 50;
+					break;
+				}
+			}
+			return;
+		}
+	}
+	if (morir == body1)
+	{
+		App->player->ball.body->SetLinearSpeed(0, 0);
+		App->player->ball.body->SetPosition(563, 582);
+		life--;
 
+		if (life <= 0)
+		{
+			if (score > best_score)
+				best_score = score;
+			score = 0;
+			life = 3;
+		}
+
+		return;
+	}
+}

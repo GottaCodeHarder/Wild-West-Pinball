@@ -4,7 +4,6 @@
 #include "ModuleRender.h"
 #include "ModulePhysics.h"
 #include "p2Point.h"
-#include "math.h"
 
 #ifdef _DEBUG
 #pragma comment( lib, "Box2D/libx86/Debug/Box2D.lib" )
@@ -40,12 +39,16 @@ update_status ModulePhysics::PreUpdate()
 {
 	world->Step(1.0f / 60.0f, 6, 2);
 
-	// TODO: HomeWork
-	/*
 	for(b2Contact* c = world->GetContactList(); c; c = c->GetNext())
 	{
+		if(c->GetFixtureA()->IsSensor() && c->IsTouching())
+		{
+			PhysBody* pb1 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
+			PhysBody* pb2 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
+			if(pb1 && pb2 && pb1->listener)
+				pb1->listener->OnCollision(pb1, pb2);
+		}
 	}
-	*/
 
 	return UPDATE_CONTINUE;
 }
