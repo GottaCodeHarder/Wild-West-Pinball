@@ -34,6 +34,8 @@ public:
 	PhysBody* lanzadera;
 	PhysBody* eje_lanz;
 
+	bool ball;
+
 	SDL_Texture* circle;
 	SDL_Texture* background;
 	SDL_Texture* foreground;
@@ -54,4 +56,5 @@ public:
 
 	p2Point<int> ray;
 	bool ray_on;
+	float pot = 0.0f;
 };

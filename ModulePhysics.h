@@ -43,6 +43,8 @@ public:
 	int width, height;
 	b2Body* body;
 	Module* listener;
+	SDL_Texture* graphic;
+	uint music;
 
 
 private:
@@ -64,10 +66,8 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	PhysBody* CreateCircleFix(int x, int y, int diam, float rest);
-	PhysBody* CreateCircle(int x, int y, int radius, bool isSensor = false);
-	PhysBody* CreateRectangle(int x, int y, int width, int height, float rest, body_type type);
-	PhysBody* CreateChain(int x, int y, int* points, int size, float rest);
+	PhysBody* CreateObj(int x, int y, int* points, int size, int radius, int width, int height, float rest, bool sensor, body_type type);
+	
 
 	void CreateLineJoint(PhysBody* body_1, PhysBody* body_2, float freq, float damp);
 	void CreateRevoluteJoint(PhysBody* body_1, PhysBody* body_2, int x_pivot_1 = 0, int y_pivot_1 = 0, int x_pivot_2 = 0, int y_pivot_2 = 0, int max_angle = INT_MAX, int min_angle = INT_MIN);

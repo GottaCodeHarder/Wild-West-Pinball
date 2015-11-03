@@ -47,10 +47,11 @@ bool ModuleSceneIntro::Start()
 	sfx_launcher = App->audio->LoadFx("pinball/launcher.wav");
 	sfx_flipper = App->audio->LoadFx("pinball/flipper.wav"); // Provisional
 
+
 	// MAPA
 
-	int	map[154] = {
-		671, 749,
+	int	map[156] = {
+		676, 747,
 		684, 749,
 		692, 744,
 		694, 733,
@@ -125,8 +126,9 @@ bool ModuleSceneIntro::Start()
 		637, 1008,
 		607, 376,
 		617, 367,
-		635, 758,
-		672, 758
+		634, 747,
+		646, 999,
+		688, 999
 	};
 
 	int barras_cash[16] = {
@@ -505,56 +507,67 @@ bool ModuleSceneIntro::Start()
 		524, 531
 	};
 
-	App->physics->CreateChain(0, 0, map, 154, 0.2);
-	App->physics->CreateChain(0, 0, barras_cash, 16, 0.2);
-	App->physics->CreateChain(0, 0, barras_cash_2, 16, 0.2);
-	App->physics->CreateChain(0, 0, barras_sup, 16, 0.2);
-	App->physics->CreateChain(0, 0, barras_sup_2, 16, 0.2);
-	App->physics->CreateChain(0, 0, base_flip_der, 20, 0.2);
-	App->physics->CreateChain(0, 0, base_flip_izq, 22, 0.2);
-	App->physics->CreateChain(0, 0, cash, 192, 0.2);
-	App->physics->CreateChain(0, 0, curva_der_arriba, 52, 0.2);
-	App->physics->CreateChain(0, 0, tri_der, 30, 0.2);
-	App->physics->CreateChain(0, 0, tri_izq, 30, 0.2);
+	int muerte[4] = {
+		303, 1000,
+		463, 1000
+	};
 
-	App->physics->CreateChain(0, 0, reb_der, 6, 4.0f);
-	App->physics->CreateChain(0, 0, reb_izq, 6, 4.0f);
+
+	App->physics->CreateObj(0, 0, map, 156, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, barras_cash, 16, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, barras_cash_2, 16, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, barras_sup, 16, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, barras_sup_2, 16, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, base_flip_der, 20, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, base_flip_izq, 22, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, cash, 192, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, curva_der_arriba, 52, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, tri_der, 30, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, tri_izq, 30, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, reb_der, 6, 0, 0, 0, 0.2f, false, b_static);
+	App->physics->CreateObj(0, 0, reb_izq, 6, 0, 0, 0, 0.2f, false, b_static);
+
+	//SENSOR MUERTE ABAJO
+	//App->physics->CreateObj(0, 0, muerte, 4, 0, 0, 0, 0, true, b_static);
+
+
 
 	// PUENTE
 	if (!activation)
 	{
-		App->physics->CreateChain(0, 0, via_superior, 112, 0.2);
-		App->physics->CreateChain(0, 0, via_inferior, 44, 0.2);
+		App->physics->CreateObj(0, 0, via_superior, 112, 0, 0, 0, 0.2f, false, b_static);
+		App->physics->CreateObj(0, 0, via_inferior, 44, 0, 0, 0, 0.2f, false, b_static);
 	}
 	if (activation)
 	{
-		App->physics->CreateChain(0, 0, via_central, 76, 0.2);
+		App->physics->CreateObj(0, 0, via_central, 76, 0, 0, 0, 0.2f, false, b_static);
 	}
 
-	App->physics->CreateCircleFix(183, 98, 55, 2.0f);
-	App->physics->CreateCircleFix(215, 272, 35, 2.0f);
-	App->physics->CreateCircleFix(290, 273, 35, 1.2f);
-	App->physics->CreateCircleFix(255, 310, 30, 1.0f);
-	App->physics->CreateCircleFix(364, 218, 35, 1.2f);
-	App->physics->CreateCircleFix(425, 266, 35, 1.2f);
-	App->physics->CreateCircleFix(470, 208, 35, 1.2f);
+	App->physics->CreateObj(183, 98, NULL, 0, 55, 0, 0, 1.2f, false, b_static);
+	App->physics->CreateObj(215, 272, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
+	App->physics->CreateObj(290, 273, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
+	App->physics->CreateObj(255, 310, NULL, 0, 30, 0, 0, 1.0f, false, b_static);
+	App->physics->CreateObj(364, 218, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
+	App->physics->CreateObj(425, 266, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
+	App->physics->CreateObj(470, 208, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
 
-	App->physics->CreateRectangle(670, 825, 40, 80, 10.0f, b_dynamic);
-
-	flipper_izq = App->physics->CreateRectangle(300, 905, 100, 25, 0, b_dynamic);
-	flipper_izq_wheel = App->physics->CreateCircleFix(255, 905, 20, 0);
+	flipper_izq = App->physics->CreateObj(300, 905, NULL, 0, 0, 100, 25, 0, false, b_dynamic);
+	flipper_izq_wheel = App->physics->CreateObj(255, 905, NULL, 0, 20, 0, 0, 0, true, b_static);
+	
 
 	App->physics->CreateRevoluteJoint(flipper_izq, flipper_izq_wheel, -42, 0, 0, 0, 30, -20);
 
-	flipper_der = App->physics->CreateRectangle(420, 905, 100, 25, 0, b_dynamic);
-	flipper_der_wheel = App->physics->CreateCircleFix(472, 905, 20, 0);
+	flipper_der = App->physics->CreateObj(420, 905, NULL, 0, 0, 100, 25, 0, false, b_dynamic);
+		
+	flipper_der_wheel = App->physics->CreateObj(472, 905, NULL, 0, 20, 0, 0, 0, false, b_static);
+	
 
 	App->physics->CreateRevoluteJoint(flipper_der, flipper_der_wheel, 42, 0, 0, 0, 20, -30);
 
-	lanzadera = App->physics->CreateRectangle(663, 820, 41, 50, 0.0f, b_dynamic);
-	eje_lanz = App->physics->CreateCircleFix(640, 765, 10, 0);
+	lanzadera = App->physics->CreateObj(647, 810, NULL, 0, 0, 48, 25, 0, false, b_dynamic);
+	eje_lanz = App->physics->CreateObj(630, 722, NULL, 0, 1, 0, 0, 0, false, b_static);
 	App->physics->CreateLineJoint(lanzadera, eje_lanz, 20.0f, 1.0f);
-
+	ball = false;
 	return ret;
 }
 
@@ -574,41 +587,38 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(background, 0, 0, NULL, 0, 0);
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		circles.add(App->physics->CreateObj(App->input->GetMouseX(), App->input->GetMouseY(), NULL, 0, 20, 0, 0, 0, false, b_dynamic));
+
+	if (!ball)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 10));
+		circles.add(App->physics->CreateObj(670, 730, NULL, 0, 20, 0, 0, 0, false, b_dynamic));
+		ball = true;
 	}
+		
 
 	if ((App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 		App->audio->PlayFx(sfx_flipper);
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 		flipper_izq->Turn(-360);
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
+	
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 		flipper_der->Turn(360);
-	}
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
-	{
-		flipper_izq->Turn(720);
-	}
+		flipper_izq->Turn(1000);
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
-	{
-		flipper_der->Turn(-720);
-	}
+		flipper_der->Turn(-1000);
+	
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
+		App->audio->PlayFx(sfx_launcher);
 
-	static float pot = 0.0f; // Es necesario?
-
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && pot < 40000)
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && pot < 20000)
 	{
-		pot += 500.0f;
+		pot += 100.0f;
 	    lanzadera->Push(0, pot);
 	}
-
 	else
 		pot = 0;
 

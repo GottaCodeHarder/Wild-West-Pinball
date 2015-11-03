@@ -50,28 +50,6 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircleFix(int x, int y, int diam, float rest)
-{
-	b2BodyDef body;
-	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-
-	b2Body* b = world->CreateBody(&body);
-
-	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(diam) * 0.5f;
-
-	b2FixtureDef fixture;
-	fixture.shape = &shape;
-	fixture.restitution = rest;
-	b->CreateFixture(&fixture);
-
-	PhysBody* pbody = new PhysBody();
-	pbody->body = b;
-	pbody->width = pbody->height = diam;
-
-	return pbody;
-}
 
 void ModulePhysics::CreateLineJoint(PhysBody* body_1, PhysBody* body_2, float freq, float damp)
 {
@@ -106,33 +84,7 @@ void ModulePhysics::CreateRevoluteJoint(PhysBody* body_1, PhysBody* body_2, int 
 	world->CreateJoint(&def);
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool isSensor)
-{
-	b2BodyDef body;
-	body.type = b2_dynamicBody;
-	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-
-	b2Body* b = world->CreateBody(&body);
-
-	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(radius);
-	b2FixtureDef fixture;
-	fixture.shape = &shape;
-	fixture.density = 1.0f;
-	fixture.restitution = 0;
-	fixture.friction = 5;
-	fixture.isSensor = isSensor;
-	b->CreateFixture(&fixture);
-
-	// TODO 4: add a pointer to PhysBody as UserData to the body
-	PhysBody* pbody = new PhysBody();
-	pbody->body = b;
-	pbody->width = pbody->height = radius;
-
-	return pbody;
-}
-
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, float rest, body_type type)
+PhysBody* ModulePhysics::CreateObj(int x, int y, int* points, int size, int radius, int width, int height, float rest, bool sensor, body_type type)
 {
 	b2BodyDef body;
 
@@ -150,59 +102,77 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, fl
 		body.type = b2_dynamicBody;
 		break;
 	}
-
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-
-	b2Body* b = world->CreateBody(&body);
-	b2PolygonShape box;
-	box.SetAsBox(PIXEL_TO_METERS(width) * 0.5f, PIXEL_TO_METERS(height) * 0.5f);
-
-	b2FixtureDef fixture;
-	fixture.shape = &box;
-	fixture.density = 1.0f;
-	fixture.restitution = rest;
-	b->CreateFixture(&fixture);
-
-	PhysBody* pbody = new PhysBody();
-	pbody->body = b;
-	pbody->width = width * 0.5f;
-	pbody->height = height * 0.5f;
-
-	return pbody;
-}
-
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, float rest)
-{
-	b2BodyDef body;
-	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-
 	b2Body* b = world->CreateBody(&body);
 
-	b2ChainShape shape;
-	b2Vec2* p = new b2Vec2[size / 2];
-
-	for(uint i = 0; i < size / 2; ++i)
+	if (radius != 0)
 	{
-		p[i].x = PIXEL_TO_METERS(points[i * 2 + 0]);
-		p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
+		b2CircleShape shape;
+		shape.m_radius = PIXEL_TO_METERS(radius/2);
+
+		b2FixtureDef fixture;
+		fixture.shape = &shape;
+		fixture.density = 1.0f;
+		fixture.restitution = rest;
+		fixture.friction = 5;
+		fixture.isSensor = sensor;
+		b->CreateFixture(&fixture);
+
+		PhysBody* pbody = new PhysBody();
+		pbody->body = b;
+		pbody->width = pbody->height = radius/2;
+		return pbody;
 	}
 
-	shape.CreateLoop(p, size / 2);
+	else if (width != 0 && height != 0)
+	{
+		b2PolygonShape box;
+		box.SetAsBox(PIXEL_TO_METERS(width) * 0.5f, PIXEL_TO_METERS(height) * 0.5f);
 
-	b2FixtureDef fixture;
-	fixture.shape = &shape;
-	fixture.restitution = rest;
-	b->CreateFixture(&fixture);
+		b2FixtureDef fixture;
+		fixture.shape = &box;
+		fixture.density = 1.0f;
+		fixture.restitution = rest;
+		fixture.isSensor = sensor;
+		b->CreateFixture(&fixture);
 
-	delete p;
+		PhysBody* pbody = new PhysBody();
+		pbody->body = b;
+		pbody->width = width * 0.5f;
+		pbody->height = height * 0.5f;
+		return pbody;
+	}
 
-	PhysBody* pbody = new PhysBody();
-	pbody->body = b;
-	pbody->width = pbody->height = 0;
+	else if (size != 0)
+	{
+		b2ChainShape shape;
+		b2Vec2* p = new b2Vec2[size / 2];
 
-	return pbody;
+		for (uint i = 0; i < size / 2; ++i)
+		{
+			p[i].x = PIXEL_TO_METERS(points[i * 2 + 0]);
+			p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
+		}
+
+		shape.CreateLoop(p, size / 2);
+
+		b2FixtureDef fixture;
+		fixture.shape = &shape;
+		fixture.restitution = rest;
+		fixture.isSensor = sensor;
+		b->CreateFixture(&fixture);
+		delete p;
+
+		PhysBody* pbody = new PhysBody();
+		pbody->body = b;
+		pbody->width = pbody->height = 0;
+		return pbody;
+	}
+
+	
 }
+
+
 
 // 
 update_status ModulePhysics::PostUpdate()
