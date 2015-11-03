@@ -1,32 +1,31 @@
-﻿Compilación iniciada a las 03/11/2015 17:33:04.
-     1>Proyecto "D:\Users\samuelns\Documents\GitHub\Wild-West-Pinball\SDL Game.vcxproj" en el nodo 2 (Build destinos).
+﻿Compilación iniciada a las 03/11/2015 23:14:46.
+     1>Proyecto "C:\Users\Master\Documents\UPC - UNIVERSITAT POLITECNICA\VideoJuegos CITM\3r - Fisica II\Wild West Pinball\Wild-West-Pinball\SDL Game.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Application.cpp Main.cpp ModuleAudio.cpp ModuleInput.cpp ModulePhysics.cpp ModulePlayer.cpp ModuleRender.cpp ModuleSceneIntro.cpp ModuleTextures.cpp ModuleWindow.cpp
-         ModulePhysics.cpp
-     1>d:\users\samuelns\documents\github\wild-west-pinball\modulephysics.cpp(144): warning C4244: '=' : conversión de 'float' a 'int'; posible pérdida de datos
-     1>d:\users\samuelns\documents\github\wild-west-pinball\modulephysics.cpp(145): warning C4244: '=' : conversión de 'float' a 'int'; posible pérdida de datos
-     1>d:\users\samuelns\documents\github\wild-west-pinball\modulephysics.cpp(154): warning C4018: '<' : no coinciden signed/unsigned
-         Generando código...
-     1>d:\users\samuelns\documents\github\wild-west-pinball\modulephysics.cpp(176): warning C4715: 'ModulePhysics::CreateObj' : no todas las rutas de acceso de control devuelven un valor
-         Compilando...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Application.cpp Main.cpp ModuleAudio.cpp ModuleInput.cpp ModulePhysics.cpp ModulePlayer.cpp ModuleRender.cpp ModuleSceneIntro.cpp ModuleTextures.cpp ModuleWindow.cpp log.cpp
+         log.cpp
          ModuleWindow.cpp
          ModuleTextures.cpp
          ModuleSceneIntro.cpp
-     1>d:\users\samuelns\documents\github\wild-west-pinball\modulesceneintro.cpp(644): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
-     1>d:\users\samuelns\documents\github\wild-west-pinball\modulesceneintro.cpp(646): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
-     1>d:\users\samuelns\documents\github\wild-west-pinball\modulesceneintro.cpp(648): warning C4244: 'argumento' : conversión de 'float' a 'int'; posible pérdida de datos
-     1>d:\users\samuelns\documents\github\wild-west-pinball\modulesceneintro.cpp(651): warning C4244: 'argumento' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(667): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(669): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(671): warning C4244: 'argumento' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulesceneintro.cpp(674): warning C4244: 'argumento' : conversión de 'float' a 'int'; posible pérdida de datos
          ModuleRender.cpp
          ModulePlayer.cpp
-     1>d:\users\samuelns\documents\github\wild-west-pinball\moduleplayer.cpp(80): warning C4244: '+=' : conversión de 'float' a 'int'; posible pérdida de datos
-     1>d:\users\samuelns\documents\github\wild-west-pinball\moduleplayer.cpp(81): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\moduleplayer.cpp(89): warning C4244: '+=' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\moduleplayer.cpp(91): warning C4244: 'argumento' : conversión de 'int' a 'float'; posible pérdida de datos
+         ModulePhysics.cpp
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(146): warning C4244: '=' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(147): warning C4244: '=' : conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(156): warning C4018: '<' : no coinciden signed/unsigned
          ModuleInput.cpp
          ModuleAudio.cpp
          Main.cpp
          Application.cpp
          Generando código...
+     1>c:\users\master\documents\upc - universitat politecnica\videojuegos citm\3r - fisica ii\wild west pinball\wild-west-pinball\modulephysics.cpp(178): warning C4715: 'ModulePhysics::CreateObj' : no todas las rutas de acceso de control devuelven un valor
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\samuelns\Documents\GitHub\Wild-West-Pinball\Debug\2D Physics - class 3.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\samuelns\Documents\GitHub\Wild-West-Pinball\Debug\2D Physics - class 3.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\samuelns\Documents\GitHub\Wild-West-Pinball\Debug\2D Physics - class 3.lib" /MACHINE:X86 Debug\Application.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Master\Documents\UPC - UNIVERSITAT POLITECNICA\VideoJuegos CITM\3r - Fisica II\Wild West Pinball\Wild-West-Pinball\Debug\2D Physics - class 3.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Master\Documents\UPC - UNIVERSITAT POLITECNICA\VideoJuegos CITM\3r - Fisica II\Wild West Pinball\Wild-West-Pinball\Debug\2D Physics - class 3.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Master\Documents\UPC - UNIVERSITAT POLITECNICA\VideoJuegos CITM\3r - Fisica II\Wild West Pinball\Wild-West-Pinball\Debug\2D Physics - class 3.lib" /MACHINE:X86 Debug\Application.obj
          Debug\log.obj
          Debug\Main.obj
          Debug\ModuleAudio.obj
@@ -37,9 +36,10 @@
          Debug\ModuleSceneIntro.obj
          Debug\ModuleTextures.obj
          Debug\ModuleWindow.obj
-         SDL Game.vcxproj -> D:\Users\samuelns\Documents\GitHub\Wild-West-Pinball\Debug\2D Physics - class 3.exe
-     1>Compilación del proyecto terminada "D:\Users\samuelns\Documents\GitHub\Wild-West-Pinball\SDL Game.vcxproj" (Build destinos).
+     1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: la biblioteca predeterminada'msvcrt.lib' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+         SDL Game.vcxproj -> C:\Users\Master\Documents\UPC - UNIVERSITAT POLITECNICA\VideoJuegos CITM\3r - Fisica II\Wild West Pinball\Wild-West-Pinball\Debug\2D Physics - class 3.exe
+     1>Compilación del proyecto terminada "C:\Users\Master\Documents\UPC - UNIVERSITAT POLITECNICA\VideoJuegos CITM\3r - Fisica II\Wild West Pinball\Wild-West-Pinball\SDL Game.vcxproj" (Build destinos).
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:08.51
+Tiempo transcurrido 00:00:06.59

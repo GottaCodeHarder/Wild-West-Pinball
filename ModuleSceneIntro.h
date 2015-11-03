@@ -1,7 +1,8 @@
 #pragma once
 #include "Module.h"
-#include "p2DynArray.h"
+#include "p2List.h"
 #include "p2Point.h"
+#include "p2DynArray.h"
 #include "Globals.h"
 
 class PhysBody;
@@ -31,7 +32,7 @@ struct Sign
 	int x, y;
 };
 
-class ModuleSceneIntro : public Module
+class ModuleSceneIntro : public Module, public b2ContactListener
 {
 public:
 	ModuleSceneIntro(Application* app, bool start_enabled = true);
@@ -70,15 +71,12 @@ public:
 	p2DynArray<Sign> signs;
 
 	uint sfx_bonus;
-	uint sfx_rebotadores;
+	uint sfx_spawn;
 	uint sfx_launcher;
+	uint sfx_charge;
 	uint sfx_flipper;
 
 	p2Point<int> ray;
 	bool ray_on;
 	float pot = 0.0f;
-
-	uint best_score = 0;
-	uint score = 0;
-	uint life = 3;
 };

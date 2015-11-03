@@ -7,6 +7,8 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 
+static int time = 0;
+
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	circle = NULL;
@@ -62,7 +64,9 @@ bool ModuleSceneIntro::Start()
 	background = App->textures->Load("pinball/PinballBackGround2.png");
 	foreground = App->textures->Load("pinball/PinballForeground.png");
 
-	App->audio->PlayMusic("pinball/Soundtrack.mp3", 0.0f);
+
+
+	App->audio->PlayMusic("pinball/Sountrack.ogg", 0.0f);
 	
 	// SENSOR
 	green = App->textures->Load("pinball/verde.png");
@@ -71,8 +75,9 @@ bool ModuleSceneIntro::Start()
 	arrow_pink = App->textures->Load("pinball/rosa.png");
 
 	sfx_bonus = App->audio->LoadFx("pinball/ding.wav");
-	sfx_rebotadores = App->audio->LoadFx("pinball/rebotadores.wav");
-	sfx_launcher = App->audio->LoadFx("pinball/launcher.wav");
+	sfx_spawn = App->audio->LoadFx("pinball/respawn.ogg");
+	sfx_launcher = App->audio->LoadFx("pinball/shoot.ogg");
+	sfx_charge = App->audio->LoadFx("pinball/charge.ogg");
 
 
 	// MAPA
@@ -569,10 +574,6 @@ bool ModuleSceneIntro::Start()
 	App->physics->CreateObj(0, 0, reb_bajo_der, 6, 0, 0, 0, 5.0f, false, b_static);
 	App->physics->CreateObj(0, 0, reb_bajo_izq, 6, 0, 0, 0, 5.0f, false, b_static);
 
-	//SENSOR MUERTE ABAJO
-	morir = App->physics->CreateObj(0, 0, muerte, 6, 0, 0, 0, 0, true, b_static);
-	
-	signs.PushBack(Sign(this, 454, 112, lightTypes::green));
 
 	// PUENTE
 	if (!activation)
@@ -587,17 +588,18 @@ bool ModuleSceneIntro::Start()
 
 	App->physics->CreateObj(183, 98, NULL, 0, 55, 0, 0, 1.2f, false, b_static);
 	App->physics->CreateObj(215, 272, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
-	App->physics->CreateObj(290, 273, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
+	App->physics->CreateObj(295, 272, NULL, 0, 30, 0, 0, 1.2f, false, b_static);
 	App->physics->CreateObj(255, 310, NULL, 0, 30, 0, 0, 1.0f, false, b_static);
-	App->physics->CreateObj(364, 218, NULL, 0, 35, 0, 0, 1.5f, false, b_static);
-	App->physics->CreateObj(425, 266, NULL, 0, 35, 0, 0, 1.5f, false, b_static);
-	App->physics->CreateObj(470, 208, NULL, 0, 35, 0, 0, 1.5f, false, b_static);
+	App->physics->CreateObj(364, 218, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
+	App->physics->CreateObj(425, 266, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
+	App->physics->CreateObj(470, 208, NULL, 0, 35, 0, 0, 1.2f, false, b_static);
 
+	//SENSOR MUERTE ABAJO
+	morir = App->physics->CreateObj(0, 0, muerte, 6, 0, 0, 0, 0, true, b_static);
+	morir->listener = this;
 	
-	
+	signs.PushBack(Sign(this, 454, 112, lightTypes::green)); // Not Working anyway...
 
-	
-	
 	return ret;
 }
 
@@ -615,10 +617,39 @@ update_status ModuleSceneIntro::Update()
 	// KEYBOARD
 	if (!App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 		App->renderer->Blit(background, 0, 0, NULL, 0, 0);
+		
 
-	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-		circles.add(App->physics->CreateObj(App->input->GetMouseX(), App->input->GetMouseY(), NULL, 0, 20, 0, 0, 0, false, b_dynamic));
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		circles.add(App->physics->CreateObj(App->input->GetMouseX(), App->input->GetMouseY(), 0, 0, 25, 0, 0, 0, false, b_dynamic));
+		circles.getLast()->data->listener = this;
+	}
 
+	if (time <= 50)
+	{
+		App->renderer->Blit(green, 274, 216, NULL);
+		App->renderer->Blit(green, 193, 528, NULL);
+		App->renderer->Blit(green, 505, 611, NULL);
+		App->renderer->Blit(arrow_pink, 153, 799, NULL);
+	}
+	else if (time <= 100 && time > 50)
+	{
+		App->renderer->Blit(purple, 238, 215, NULL);
+		App->renderer->Blit(purple, 185, 549, NULL);
+		App->renderer->Blit(purple, 490, 591, NULL);
+		App->renderer->Blit(arrow_pink, 117, 786, NULL);
+	}
+	else if (time <= 150 && time > 100)
+	{
+		App->renderer->Blit(blue, 201, 215, NULL);
+		App->renderer->Blit(blue, 476, 570, NULL);
+		App->renderer->Blit(blue, 177, 572, NULL);
+	}
+	else if (time > 150)
+	{
+		time = 0;
+		App->player->score += 10;
+	}
 	// Prepare for raycast ------------------------------------------------------
 	
 	iPoint mouse;
@@ -629,14 +660,6 @@ update_status ModuleSceneIntro::Update()
 	fVector normal(0.0f, 0.0f);
 
 	// All draw functions ------------------------------------------------------
-
-	for (uint i = 0; i < signs.Count(); ++i)
-	{
-		if (signs[i].on == true)
-		{
-			App->renderer->Blit(signs[i].texture, signs[i].x, signs[i].y, NULL);
-		}
-	}
 
 	// ray -----------------
 	if(ray_on == true)
@@ -652,14 +675,26 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	char title[100];
-	sprintf_s(title, "%s Balls: %d Score: %06d Best Score: %06d", TITLE, life, score, best_score);
+	sprintf_s(title, "%s Balls: %d Score: %06d Best Score: %06d   Respawn Press < 1 >", TITLE, App->player->hp, App->player->score, App->player->best_score);
 	App->window->SetTitle(title);
+	time++;
 
 	return UPDATE_CONTINUE;
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* body1, PhysBody* body2)
 {
+	App->audio->PlayFx(App->player->flipper_der.fx);
+
+	if (morir == body1)
+	{
+		App->player->ball.body->SetLinearSpeed(0, 0);
+		App->player->ball.body->SetAngularSpeed(0);
+		App->player->ball.body->SetPosition(675, 735);
+
+		return;
+	}
+
 	for (uint i = 0; i < signs.Count(); ++i)
 	{
 		if (body1 == signs[i].body)
@@ -671,36 +706,20 @@ void ModuleSceneIntro::OnCollision(PhysBody* body1, PhysBody* body2)
 				switch (signs[i].type)
 				{
 				case 1:
-					score += 100;
+					App->player->score += 100;
 					break;
 				case 2:
-					score += 100;
+					App->player->score += 100;
 					break;
 				case 3:
-					score += 100;
+					App->player->score += 100;
 					break;
 				case 4:
-					score += 50;
+					App->player->score += 50;
 					break;
 				}
 			}
 			return;
 		}
-	}
-	if (morir == body1)
-	{
-		App->player->ball.body->SetLinearSpeed(0, 0);
-		App->player->ball.body->SetPosition(563, 582);
-		life--;
-
-		if (life <= 0)
-		{
-			if (score > best_score)
-				best_score = score;
-			score = 0;
-			life = 3;
-		}
-
-		return;
 	}
 }

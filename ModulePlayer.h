@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "p2Point.h"
+
 class PhysBody;
 
 struct Object
@@ -9,6 +10,7 @@ struct Object
 	SDL_Texture* graphic;
 	PhysBody* body;
 	uint fx;
+
 
 	Object() : graphic(NULL), body(NULL)
 	{}
@@ -30,15 +32,24 @@ public:
 	PhysBody* flipper_der_wheel;
 
 	int pot;
+	uint hp = 3;
+	uint best_score = 0;
+	uint score = 0;
 
 	bool Start();
 	bool alive;
 	update_status Update();
 	bool CleanUp();
 
+	uint sfx_teleport;
+
 	int b_x, b_y;
 	int der_x, der_y;
 	int izq_x, izq_y;
+	int lan_x, lan_y;
+
+	void Respawn();
+
 
 public:
 
